@@ -1,1 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Solicitação de Demandas - Vibra Parque Vila Guilherme</title>
+</head>
+<body>
 
+  <h1>Solicitação de Demandas</h1>
+  <p>Preencha os dados abaixo para registrar sua solicitação.</p>
+
+  <form>
+    <label>Nome do morador:</label><br>
+    <input type="text" name="nome"><br><br>
+
+    <label>Torre:</label><br>
+    <select name="torre">
+      <option>Torre 1</option>
+      <option>Torre 2</option>
+      <option>Torre 3</option>
+    </select><br><br>
+
+    <label>Unidade:</label><br>
+    <input type="text" name="unidade"><br><br>
+
+    <label>Categoria:</label><br>
+    <select name="categoria">
+      <option>Elétrica</option>
+      <option>Hidráulica</option>
+      <option>Limpeza</option>
+      <option>Garagem</option>
+      <option>Portaria / Acesso</option>
+      <option>Elevador</option>
+      <option>Áreas comuns</option>
+      <option>Outros</option>
+    </select><br><br>
+
+    <label>Local do problema:</label><br>
+    <input type="text" name="local"><br><br>
+
+    <label>Descrição da solicitação:</label><br>
+    <textarea name="descricao" rows="5" cols="40"></textarea><br><br>
+
+    <label>Urgência:</label><br>
+    <select name="urgencia">
+      <option>Baixa</option>
+      <option>Média</option>
+      <option>Alta</option>
+    </select><br><br>
+
+    <button type="submit">Enviar solicitação</button>
+  </form>
+
+</body>
+</html>
