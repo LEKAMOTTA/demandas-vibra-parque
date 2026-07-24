@@ -2,29 +2,31 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Solicitação de Demandas - Vibra Parque Vila Guilherme</title>
+  <title>Solicitação de Demandas - VPVG</title>
 </head>
 <body>
 
-  <h1>Solicitação de Demandas</h1>
+  <h1>Solicitação de Demandas - VPVG</h1>
   <p>Preencha os dados abaixo para registrar sua solicitação.</p>
 
-  <form>
+  <form id="formDemanda">
     <label>Nome do morador:</label><br>
-    <input type="text" name="nome"><br><br>
+    <input type="text" id="nome" required><br><br>
 
     <label>Torre:</label><br>
-    <select name="torre">
-      <option>Torre 1</option>
-      <option>Torre 2</option>
-      <option>Torre 3</option>
+    <select id="torre" required>
+      <option value="">Selecione</option>
+      <option>Torre A</option>
+      <option>Torre B</option>
+      <option>Torre C</option>
     </select><br><br>
 
     <label>Unidade:</label><br>
-    <input type="text" name="unidade"><br><br>
+    <input type="text" id="unidade" required><br><br>
 
     <label>Categoria:</label><br>
-    <select name="categoria">
+    <select id="categoria" required>
+      <option value="">Selecione</option>
       <option>Elétrica</option>
       <option>Hidráulica</option>
       <option>Limpeza</option>
@@ -36,13 +38,14 @@
     </select><br><br>
 
     <label>Local do problema:</label><br>
-    <input type="text" name="local"><br><br>
+    <input type="text" id="local" required><br><br>
 
     <label>Descrição da solicitação:</label><br>
-    <textarea name="descricao" rows="5" cols="40"></textarea><br><br>
+    <textarea id="descricao" rows="5" cols="40" required></textarea><br><br>
 
     <label>Urgência:</label><br>
-    <select name="urgencia">
+    <select id="urgencia" required>
+      <option value="">Selecione</option>
       <option>Baixa</option>
       <option>Média</option>
       <option>Alta</option>
@@ -50,6 +53,47 @@
 
     <button type="submit">Enviar solicitação</button>
   </form>
+
+  <p id="mensagem"></p>
+
+  <script>
+    const URL_SCRIPT = "https://script.google.com/macros/s/AKfycbwViCPnM8z3Q-SWyfS0G3zGev-y73v8YV2Q0hFuGtlior2sRLEj_8EetS4JN94kKo9a/exec";
+
+    document.getElementById("formDemanda").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const dados = {
+        nome: document.getElementById("nome").value,
+        torre: document.getElementById("torre").value,
+        unidade: document.getElementById("unidade").value,
+        whatsapp: document.getElementById("whatsapp").value,
+        categoria: document.getElementById("categoria").value,
+        local: document.getElementById("local").value,
+        descricao: document.getElementById("descricao").value,
+        urgencia: document.getElementById("urgencia").value
+      };
+
+      fetch(URL_SCRIPT, {
+        method: "POST",
+        body: JSON.stringify(dados)
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.sucesso) {
+          document.getElementById("mensagem").innerHTML =
+            "Solicitação enviada com sucesso! Seu protocolo é: <strong>" + data.protocolo + "</strong>";
+          document.getElementById("formDemanda").reset();
+        } else {
+          document.getElementById("mensagem").innerText =
+            "Erro ao enviar solicitação. Tente novamente.";
+        }
+      })
+      .catch(error => {
+        document.getElementById("mensagem").innerText =
+          "Erro de conexão. Verifique o sistema.";
+      });
+    });
+  </script>
 
 </body>
 </html>
